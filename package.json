@@ -1,6 +1,6 @@
 {
   "name": "vue-exp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue-exp 对 Vue 扩展了一些实用的方法和属性",
   "main": "dist/vue-exp.umd.js",
   "module": "src/index",
@@ -76,6 +76,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "vue": "^2.6.11"
+    "vue": "^2.0.0"
   }
 }
