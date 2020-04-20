@@ -1,18 +1,22 @@
-import { VueConstructor, VNodeComponentOptions } from "vue"
-import { Vue } from "vue/types/vue";
+import * as v from "vue"
 
-import { ComponentOptions } from "vue/types/options";
+// import { VueConstructor } from "vue"
+// import { Vue } from "vue/types/vue";
+// import { ComponentOptions } from "vue/types/options";
 
 import { PluginFunction, PluginObject } from "vue/types/plugin";
 import { VNode } from "vue/types/vnode";
 
 
 
-declare module vue {
+declare module "vue" {
+
 
   type VuePlugin = PluginObject<any> | PluginFunction<any>;
 
-  interface VueConstructor<V extends Vue = Vue> {
+  
+
+   interface VueConstructor<V>{
 
 
     /**

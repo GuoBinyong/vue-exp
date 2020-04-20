@@ -53,7 +53,7 @@ var projectConfig = {
       filename: '[name].script.js',  //输出的包名
       // library: "",  //库名
       module: "window",  //将包挂载到window中与库名同名的属性上
-      externals: {},  //不排除何依赖，即将所有依赖都打包进库
+      // externals: {},  //不排除何依赖，即将所有依赖都打包进库
     },
 
     // 通过 commonjs2 规范引用
@@ -138,7 +138,7 @@ var projectConfig = {
        * 如果更改了 library 的值，你可能需要考虑下是否要同步更改下 package.json 中的 name 属性；
        * 如果库不对外导出（暴露）任何东西里，推荐将该 library 设置为 null
   */
-  // library: "",
+  library: null,
 
   /*
   配置库的构建目标（即：被构建（打包）后的包）采用的模块化方案，也可以理解为：对外暴露 库 的方式，即：库将会以哪种方式被使用；该选项配置的就是 webpack 的 output.libraryTarget 选项；
