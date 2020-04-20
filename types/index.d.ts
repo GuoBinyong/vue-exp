@@ -1,6 +1,6 @@
 import * as v from "vue"
 
-// import { VueConstructor } from "vue"
+import { VueConstructor } from "vue"
 // import { Vue } from "vue/types/vue";
 // import { ComponentOptions } from "vue/types/options";
 
@@ -14,7 +14,7 @@ declare module "vue" {
 
   type VuePlugin = PluginObject<any> | PluginFunction<any>;
 
-  
+
 
    interface VueConstructor<V>{
 
@@ -60,11 +60,11 @@ declare module "vue" {
        * @param child
        * @param vm
        * @returns [parent,child]
-    
+
        注意：
        Vue 的 合并策略 mergeHook 有个bug，原码如下：
-    
-    
+
+
        // Hooks and props are merged as arrays.
        function mergeHook (
        parentVal,
