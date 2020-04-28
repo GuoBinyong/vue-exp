@@ -1,2 +1,104 @@
-!function(e,r){if("object"==typeof exports&&"object"==typeof module)module.exports=r();else if("function"==typeof define&&define.amd)define([],r);else{var t=r();for(var n in t)("object"==typeof exports?exports:e)[n]=t[n]}}(window,(function(){return function(e){var r={};function t(n){if(r[n])return r[n].exports;var o=r[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,t),o.l=!0,o.exports}return t.m=e,t.c=r,t.d=function(e,r,n){t.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:n})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,r){if(1&r&&(e=t(e)),8&r)return e;if(4&r&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(t.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&r&&"string"!=typeof e)for(var o in e)t.d(n,o,function(r){return e[r]}.bind(null,o));return n},t.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(r,"a",r),r},t.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},t.p="",t(t.s=1)}([function(e,r){e.exports=require("vue")},function(e,r,t){"use strict";t.r(r);var n=t(0),o=t.n(n);o.a.regComponents=function(e){var r=this;e&&Object.keys(e).forEach((function(t){r.component(t,e[t])}))},o.a.usePlugins=function(e){if(!Array.isArray(e))throw"usePlugins 只能接收数组类型的参数";e.forEach((function(e){var r=e,t=null;Array.isArray(e)&&!e.install&&(r=e[0],t=e[1]),this.use(r,t)}),o.a)},o.a.regMixins=function(e){if(!Array.isArray(e))throw"regMixins 只能接收数组类型的参数";e.forEach((function(e){this.mixin(e)}),o.a)},o.a.byMergeStrategies={includeAllWihtArray:function(e,r,t){return r?e?Array.isArray(e)?e.concat(r):[e].concat(r):Array.isArray(r)?r:[r]:e}};var i={computed:{$allSlots:function(){return Object.values(this.$slots).reduce((function(e,r){return e.concat(r)}),[])}}};o.a.regMixins([i])}])}));
-//# sourceMappingURL=vue-exp.umd.js.map
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('vue')) :
+  typeof define === 'function' && define.amd ? define(['vue'], factory) :
+  (global = global || self, factory(global.Vue));
+}(this, (function (Vue) { 'use strict';
+
+  Vue = Vue && Object.prototype.hasOwnProperty.call(Vue, 'default') ? Vue['default'] : Vue;
+
+  /**
+   * 全局注册多个组件
+   * @param componentOptions  : {componentName:string,component:VueComponent} 注册组件的配置对象，属性是组件的名字，值是需要注册的组件
+   */
+
+  Vue.regComponents = function (componentOptions) {
+    var _this = this;
+
+    if (componentOptions) {
+      Object.keys(componentOptions).forEach(function (compName) {
+        _this.component(compName, componentOptions[compName]);
+      });
+    }
+  };
+  /**
+   * 全局应用多个插件
+   * @param plugins  : Array<VuePlugin | [VuePlugin,options]>  插件数组
+   */
+
+
+  Vue.usePlugins = function (plugins) {
+    if (Array.isArray(plugins)) {
+      plugins.forEach(function (pluginOptions) {
+        var plugin = pluginOptions;
+        var options = null;
+
+        if (Array.isArray(pluginOptions) && !pluginOptions.install) {
+          plugin = pluginOptions[0];
+          options = pluginOptions[1];
+        }
+
+        this.use(plugin, options);
+      }, Vue);
+    } else {
+      throw "usePlugins 只能接收数组类型的参数";
+    }
+  };
+  /**
+   * 全局注册多个混入
+   * @param mixins  : Array<Mixin> 混入数组
+   */
+
+
+  Vue.regMixins = function (mixins) {
+    if (Array.isArray(mixins)) {
+      mixins.forEach(function (mixin) {
+        this.mixin(mixin);
+      }, Vue);
+    } else {
+      throw "regMixins 只能接收数组类型的参数";
+    }
+  }; //合并策略：开始
+
+
+  Vue.byMergeStrategies = {
+    /**
+     * 合并的结果会按顺序包含 parent 和 child ;
+     * @param parent
+     * @param child
+     * @param vm
+     * @returns [parent,child]
+      注意：
+     Vue 的 合并策略 mergeHook 有个bug，原码如下：
+      // Hooks and props are merged as arrays.
+     function mergeHook (
+     parentVal,
+     childVal
+     ) {
+    return childVal
+      ? parentVal
+        ? parentVal.concat(childVal)  //这里应该先判断 parentVal 是否是数组
+        : Array.isArray(childVal)
+          ? childVal
+          : [childVal]
+      : parentVal
+    }
+     */
+    includeAllWihtArray: function includeAllWihtArray(parentVal, childVal, vm) {
+      return childVal ? parentVal ? Array.isArray(parentVal) ? parentVal.concat(childVal) : [parentVal].concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal;
+    }
+  }; //合并策略：结束
+  //混合：开始
+  //vnode相关的混合
+
+  var vnodeMixin = {
+    computed: {
+      $allSlots: function $allSlots() {
+        return Object.values(this.$slots).reduce(function (all, slot) {
+          return all.concat(slot);
+        }, []);
+      }
+    }
+  };
+  Vue.regMixins([vnodeMixin]); //混合：结束
+
+})));
