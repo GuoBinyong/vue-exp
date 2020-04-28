@@ -1,6 +1,6 @@
 {
   "name": "vue-exp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "vue-exp 对 Vue 扩展了一些实用的方法和属性",
   "main": "dist/vue-exp.cjs.js",
   "module": "dist/vue-exp.esm.js",
