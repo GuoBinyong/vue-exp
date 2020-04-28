@@ -1,6 +1,6 @@
-import * as v from "vue"
+import Vue from 'vue'
 
-import { VueConstructor } from "vue"
+// import { VueConstructor } from "vue"
 // import { Vue } from "vue/types/vue";
 // import { ComponentOptions } from "vue/types/options";
 
@@ -9,14 +9,14 @@ import { VNode } from "vue/types/vnode";
 
 
 
-declare module "vue" {
+declare module "vue/types/vue" {
 
 
   type VuePlugin = PluginObject<any> | PluginFunction<any>;
 
 
 
-   interface VueConstructor<V>{
+  interface VueConstructor<V> {
 
 
     /**
