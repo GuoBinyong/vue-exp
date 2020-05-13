@@ -11,8 +11,15 @@ import { VNode } from "vue/types/vnode";
 
 declare module "vue/types/vue" {
 
+  // 因为 PluginFunction<any> 不能兼容 PluginFunction<never> （VueRouter就是PluginObject<never> 类型）类型，所以需要添加 never 相关的联合
+  // type VuePlugin = PluginObject<any> | PluginObject<never> | PluginFunction<any> | PluginFunction<never> ;
 
-  type VuePlugin = PluginObject<any> | PluginFunction<any>;
+  type PluginFun = (Vue: VueConstructor, options?: any) => void;
+  interface PluginObj {
+    install: PluginFun;
+    [key: string]: any;
+  }
+  type VuePlugin = PluginObj | PluginFun;
 
 
 
@@ -23,7 +30,7 @@ declare module "vue/types/vue" {
      * 全局注册多个组件
      * @param componentOptions  : {componentName:string,component:VueComponent} 注册组件的配置对象，属性是组件的名字，值是需要注册的组件
      */
-    regComponents(componentOptions: { [componentName: string]: object | VueConstructor<V> }): void;
+    regComponents(componentOptions: { [componentName: string]: object | VueConstructor }): void;
 
 
 
