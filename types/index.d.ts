@@ -14,7 +14,10 @@ declare module "vue/types/vue" {
   // 因为 PluginFunction<any> 不能兼容 PluginFunction<never> （VueRouter就是PluginObject<never> 类型）类型，所以需要添加 never 相关的联合
   // type VuePlugin = PluginObject<any> | PluginObject<never> | PluginFunction<any> | PluginFunction<never> ;
 
-  type PluginFun = (Vue: VueConstructor, options?: any) => void;
+  // type PluginFun = (Vue: VueConstructor, options?: any) => void;
+  type PluginFun = (Vue: VueConstructor, ...args:any[]) => void;
+  // type PluginFun = (...args:any[]) => void;
+  // type PluginFun = Function;
   interface PluginObj {
     install: PluginFun;
     [key: string]: any;

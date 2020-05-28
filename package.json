@@ -1,11 +1,12 @@
 {
   "name": "vue-exp",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "vue-exp 对 Vue 扩展了一些实用的方法和属性",
   "main": "dist/vue-exp.cjs.js",
   "module": "dist/vue-exp.esm.js",
   "types": "types/index.d.ts",
   "sideEffects": true,
+  "homepage": "https://github.com/GuoBinyong/vue-exp#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/GuoBinyong/vue-exp"
@@ -39,7 +40,8 @@
     "rollup": "^2.7.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.6"
+    "@babel/runtime": "^7.9.6",
+    "vue": "^2.6.11"
   },
   "peerDependencies": {
     "vue": "^2.0.0"
